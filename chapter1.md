@@ -38,7 +38,7 @@ PureScript es un lenguaje de programación cuyo objetivo es abarcar estos proble
 
 ## Tipos e inferencia de tipos
 
-El debate sobre los lenguajes de tipado estático contra los de tipado dinámico está bien documentado. PuseScript es un lenguaje de _tipado estático_, lo que significa que el compilador puede dar a un programa correcto un _tipo_ que indica su comportamiento. A la inversa, los programas a los que no se les puede dar un tipo son _programas incorrectos_, y serán rechazados por el compilador. En PureScript, al contrario que en los lenguajes de tipado dinámico, los tipos existen únicamente en _tiempo de compilación_, y no tienen respresentación en tiempo de ejecución.
+El debate sobre los lenguajes de tipado estático contra los de tipado dinámico está bien documentado. PuseScript es un lenguaje de _tipado estático_, lo que significa que el compilador puede dar a un programa correcto un _tipo_ que indica su comportamiento. A la inversa, los programas a los que no se les puede dar un tipo son _programas incorrectos_, y serán rechazados por el compilador. En PureScript, al contrario que en los lenguajes de tipado dinámico, los tipos existen únicamente en _tiempo de compilación_, y no tienen representación en tiempo de ejecución.
 
 Es importante notar que, de varias maneras, los tipos en Purescript no son como los tipos que has visto en otros lenguajes como Java o C#. Aunque sirven el mismo propósito a un nivel alto, los tipos en PureScript están inspirados por lenguajes como ML y Haskell. Los tipos de PureScript son expresivos, permitiendo al desarrollador hacer afirmaciones sólidas sobre sus programas. Más importante, el sistema de tipos de PureScript soporta _inferencia de tipos_ requiriendo muchas menos anotaciones de tipo explícitas que otros lenguajes, convirtiendo el sistema de tipos en una _herramienta_ en lugar de en un estorbo. Un simple ejemplo, el siguiente código define un _número_, pero no hay mención del tipo `Number` en ningún sitio del código:
 
@@ -65,7 +65,7 @@ Además, la red de seguridad proporcionada por un sistema de tipos permite forma
 
 La programación funcional tiene sus historias de éxito, aplicaciones donde ha sido particularmente exitosa: análisis de datos, análisis sintáctico, implementación de compiladores, programación genérica o paralelismo por nombrar unas cuantas.
 
-Sería posible practicar desarrollo de aplicaciones de extremo a extremo en un lenguaje funcional como PureScript. PureScript proporciona la abilidad de importar código JavaScript existense, proporcionando tipos para sus valores y funciones, y usar entonces esas funciones en código PureScript normal. Veremos este enfoque más tarde en el libro.
+Sería posible practicar desarrollo de aplicaciones de extremo a extremo en un lenguaje funcional como PureScript. PureScript proporciona la habilidad de importar código JavaScript existente, proporcionando tipos para sus valores y funciones, y usar entonces esas funciones en código PureScript normal. Veremos este enfoque más tarde en el libro.
 
 Sin embargo, una de las fortalezas de PureScript es su interoperabilidad con otros lenguajes que compilan a JavaScript. Otro enfoque sería usar PureScript como un subconjunto del desarrollo de tu aplicación y usar otro(s) lenguajes para escribir el resto del código JavaScript.
 
@@ -75,7 +75,7 @@ Aquí hay algunos ejemplos:
 - Aplicación escrita en JavaScript u otro lenguaje que compile a JavaScript, con pruebas escritas en PureScript.
 - PureScript usado para automatizar las pruebas de interfaz de usuario para una aplicación ya existente.
 
-En este libro, nos vamos a focalizar en resolver pequeños problemas con PureScript. Las soluciones se podrían integrar en una aplicación más grande, pero también veremos como llamar a código PureScript desde JavaScript y viceversa.
+En este libro, nos vamos a enfocar en resolver pequeños problemas con PureScript. Las soluciones se podrían integrar en una aplicación más grande, pero también veremos como llamar a código PureScript desde JavaScript y viceversa.
 
 ## Prerrequisitos
 
@@ -87,15 +87,15 @@ El compilador de PureScript se puede descargar como una distribución binaria o 
 
 Voy a asumir que estas familiarizado con JavaScript. Cualquier familiaridad previa con herramientas comunes del ecosistema JavaScript como NPM y Gulp serán beneficiosas si deseas adaptar la configuración estándar para tus necesidades, pero dicho conocimiento no es necesario.
 
-No se necesita ningún conocimiento previo de programación funcional, pero ciertamente no hace daño. Las ideas nuevas estarán acompañadas de ejemplos prácticos, de manera que seas capaz de formar una intuicion para los conceptos de programación funcional que usaremos.
+No se necesita ningún conocimiento previo de programación funcional, pero ciertamente no hace daño. Las ideas nuevas estarán acompañadas de ejemplos prácticos, de manera que seas capaz de formar una intuición para los conceptos de programación funcional que usaremos.
 
-Los lectores que esten familiarizados con el lenguaje de programación Haskell reconocerán un monton de las ideas y sintaxis presentadas en este libro, ya que PureScript está fuertemente influenciado por Haskell. Sin embargo, dichos lectores deben entender que hay unas cuantas diferencias importantes entre PureScript y Haskell. No siempre va a ser apropiado intentar aplicar ideas de un lenguaje en el otro, aunque muchos de los conceptos presentados aquí tendrán una interpretación en Haskell.
+Los lectores que estén familiarizados con el lenguaje de programación Haskell reconocerán un montón de las ideas y sintaxis presentadas en este libro, ya que PureScript está fuertemente influenciado por Haskell. Sin embargo, dichos lectores deben entender que hay unas cuantas diferencias importantes entre PureScript y Haskell. No siempre va a ser apropiado intentar aplicar ideas de un lenguaje en el otro, aunque muchos de los conceptos presentados aquí tendrán una interpretación en Haskell.
 
 ## Cómo leer este libro
 
 Los capítulos de este libro son bastante autocontenidos. Sin embargo, un principiante con poca experiencia en programación funcional debería estudiar los capítulos en orden. Los primeros capítulos sientan las bases requeridas para entender el material que aparece más tarde en el libro. Un lector que se sienta cómodo con las ideas de la programación funcional (especialmente uno con experiencia en un lenguaje fuértemente tipado como ML o Haskell) probablemente será capaz de adquirir una comprensión general del código en los capítulos posteriores del libro sin leer los capítulos iniciales. 
 
-Cada capítulo se va a focalizar en un único ejemplo práctico, proporcionando la motivación para cualquier idea nueva introducida. El código de cada capítulo está disponible en el [repositorio GitHub](https://github.com/paf31/purescript-book) del libro. Algunos capítulos incluirán fragmentos de código tomados del código fuente del capítulo, pero para adquirir un entendimiento completo debes leer el código del repositorio junto al material del libro. Las secciones más largas contendrán fragmentos más cortos que puedes ejecutar en el modo interactivo (PSCi) para ayudarte a entender.
+Cada capítulo se va a enfocar en un único ejemplo práctico, proporcionando la motivación para cualquier idea nueva introducida. El código de cada capítulo está disponible en el [repositorio GitHub](https://github.com/paf31/purescript-book) del libro. Algunos capítulos incluirán fragmentos de código tomados del código fuente del capítulo, pero para adquirir un entendimiento completo debes leer el código del repositorio junto al material del libro. Las secciones más largas contendrán fragmentos más cortos que puedes ejecutar en el modo interactivo (PSCi) para ayudarte a entender.
 
 Los ejemplos de código aparecerán en una fuente monoespaciada, como sigue:
 
@@ -107,7 +107,7 @@ import Control.Monad.Eff.Console (log)
 main = log "Hello, World!"
 ```
 
-Los comandos que deben escribirse en la linea de comandos estarán precedidos por un símbolo de dolar:
+Los comandos que deben escribirse en la linea de comandos estarán precedidos por un símbolo de dólar:
 
 ```text
 $ pulp build
@@ -136,7 +136,7 @@ Si te atascas en algún punto, hay un número de recursos disponibles online par
 - [Try PureScript!](http://try.purescript.org) es un sitio web que permite a los usuarios compilar código PureScript en el navegador web y contiene varios ejemplos de código simples.
 - [Pursuit](http://pursuit.purescript.org) es una base de datos donde puedes buscar tipos y funciones de PureScript.
 
-Si prefieres aprender leyendo ejemplos, las organizaciones de Github `purescript`, `purescript-node` y `purescript-contrib` contienen un monton de ejemplos de código PureScript.
+Si prefieres aprender leyendo ejemplos, las organizaciones de Github `purescript`, `purescript-node` y `purescript-contrib` contienen un montón de ejemplos de código PureScript.
 
 ## Acerca del autor
 
@@ -144,7 +144,7 @@ Soy el desarrollador original del compilador de PureScript. Vivo en Los Angeles,
 
 No muy tarde en mi carrera profesional, empecé a apreciar la programación funcional y sus conexiones con las matemáticas, y disfrutaba aprendiendo conceptos de programación funcional usando el lenguaje de programación Haskell.
 
-Empecé a trabajar en el compilador de PureScript como respuesta a mi experiencia con JavaScript. Me encontré usando técnicas de programación funcional que había adquirido en lenguajes como Haskell, pero quería un entorno más escrupuloso en el que aplicarlas. Las soluciones del momento incluian varios intentos de compilar Haskell a JavaScript conservando su semántica (Fay, Haste, GHCJS), pero estaba interesado en ver si tendría éxito afrontando el problema desde el otro lado - intentando mantener la semántica de JavaScript, disfrutando la sintaxis y el sistema de tipos de un lenguaje como Haskell.
+Empecé a trabajar en el compilador de PureScript como respuesta a mi experiencia con JavaScript. Me encontré usando técnicas de programación funcional que había adquirido en lenguajes como Haskell, pero quería un entorno más escrupuloso en el que aplicarlas. Las soluciones del momento incluían varios intentos de compilar Haskell a JavaScript conservando su semántica (Fay, Haste, GHCJS), pero estaba interesado en ver si tendría éxito afrontando el problema desde el otro lado - intentando mantener la semántica de JavaScript, disfrutando la sintaxis y el sistema de tipos de un lenguaje como Haskell.
 
 Mantengo [un blog](http://blog.functorial.com), y se me puede encontrar en [Twitter](http://twitter.com/paf31).
 
