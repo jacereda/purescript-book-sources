@@ -4,7 +4,7 @@
 
 En este capítulo, vamos a ver cómo las funciones recursivas pueden ser usadas para estructurar algoritmos. La recursividad es una técnica básica usada en la programación funcional que vamos a usar por todo el libro.
 
-Tambien cubriremos algunas funciones estándar de las bibliotecas estándar de PureScript. Veremos las funciones `map` y `fold`, así como algunos casos especiales útiles, como `filter` y `concatMap`.
+También cubriremos algunas funciones estándar de las bibliotecas estándar de PureScript. Veremos las funciones `map` y `fold`, así como algunos casos especiales útiles, como `filter` y `concatMap`.
 
 El ejemplo motivador para este capítulo es una biblioteca de funciones para trabajar con un sistema de ficheros virtual. Aplicaremos técnicas aprendidas en este capítulo para escribir funciones que calculan propiedades de los ficheros representados por un modelo de un sistema de ficheros.
 
@@ -128,7 +128,7 @@ Veamos el tipo de `map`:
 forall a b f. Prelude.Functor f => (a -> b) -> f a -> f b
 ```
 
-El tipo de `map` es de hecho más general de lo que necesitamos en este capítulo. Para nuestros propositos, podemos tratar `map` como si tuviese el siguiente tipo menos general:
+El tipo de `map` es de hecho más general de lo que necesitamos en este capítulo. Para nuestros propósitos, podemos tratar `map` como si tuviese el siguiente tipo menos general:
 
 ```text
 forall a b. (a -> b) -> Array a -> Array b
@@ -142,7 +142,7 @@ Este tipo dice que podemos elegir dos tipos cualesquiera, `a` y `b`, con los que
 ["1","2","3","4","5"]
 ```
 
-Aunque el operador infijo `<$>` parece una sintaxis especial, es de hecho un simple apodo (alias) para una función PureScript normal. La función es simplemente _aplicada_ usando notación infija. De hecho, la función se puede usar como una función normal poniendo el nombre entre paréntesis. Esto significa que podemos usar el nombre entre parentesis `(<$>)` en lugar de `map` sobre arrays:
+Aunque el operador infijo `<$>` parece una sintaxis especial, es de hecho un simple apodo (alias) para una función PureScript normal. La función es simplemente _aplicada_ usando notación infija. De hecho, la función se puede usar como una función normal poniendo el nombre entre paréntesis. Esto significa que podemos usar el nombre entre paréntesis `(<$>)` en lugar de `map` sobre arrays:
 
 ```text
 > (<$>) show [1, 2, 3, 4, 5]
@@ -256,7 +256,7 @@ Podemos probar nuestra función:
 [1,2,3,1,2,3,1,2,3]
 ```
 
-Esto no es exáctamente lo que queremos. En lugar de simplemente devolver el segundo elemento de cada par, necesitamos mapear una función sobre la copia interna de `1 .. n` que nos permitirá mantener el par completo:
+Esto no es exactamente lo que queremos. En lugar de simplemente devolver el segundo elemento de cada par, necesitamos mapear una función sobre la copia interna de `1 .. n` que nos permitirá mantener el par completo:
 
 ```text
 > let pairs' n = concatMap (\i -> map (\j -> [i, j]) (1 .. n)) (1 .. n)
@@ -362,7 +362,7 @@ En nuestro caso, podemos asumir que PSCi reportó el siguiente tipo:
 Boolean -> Array Unit
 ```
 
-Para nuestros propósitos, los siguientes calculos nos dicen todo lo que necesitamos saber de la función `guard` sobre arrays:
+Para nuestros propósitos, los siguientes cálculos nos dicen todo lo que necesitamos saber de la función `guard` sobre arrays:
 
 ```text
 > import Data.Array
@@ -374,7 +374,7 @@ Para nuestros propósitos, los siguientes calculos nos dicen todo lo que necesit
 0
 ```
 
-Esto es, si a `guard` se le pasa una expresión que evalua a `true`, devuelve un array con un único elemento. Si la expresión devuelve `false`, su resultado está vacío.
+Esto es, si a `guard` se le pasa una expresión que evalúa a `true`, devuelve un array con un único elemento. Si la expresión devuelve `false`, su resultado está vacío.
 
 Esto significa que si la guarda falla, la rama actual del array por comprensión terminará de manera temprana sin resultados. Lo que significa que una llamada a `guard` es equivalente a usar `filter` en el array intermedio. Prueba las dos definiciones de `factors` para verificar que dan el mismo resultado.
 
@@ -382,7 +382,7 @@ X> ## Ejercicios
 X>
 X> 1. (Fácil) Usa la función `factors` para definir una función `isPrime` que comprueba si su argumento entero es primo o no.
 X> 1. (Medio) Escribe una función usando notación do para encontrar el _producto cartesiano_ de dos arrays, es decir, el conjunto de pares de elementos `a`, `b`, donde `a` es un elemento del primer array y `b` es un elemento del segundo.
-X> 1. (Medio) Una _terna pitagórica_ es un array de números `[a, b, c]` tales que `a² + b² = c²`. Usa la función `guard` en un array por comprensión para escribir una funcion `triples` que toma un número `n` y calcula todas las ternas pitagóricas cuyos componentes sean inferiores a `n`. Tu función debe tener el tipo `Int -> Array (Array Int)`.
+X> 1. (Medio) Una _terna pitagórica_ es un array de números `[a, b, c]` tales que `a² + b² = c²`. Usa la función `guard` en un array por comprensión para escribir una función `triples` que toma un número `n` y calcula todas las ternas pitagóricas cuyos componentes sean inferiores a `n`. Tu función debe tener el tipo `Int -> Array (Array Int)`.
 X> 1. (Difícil) Escribe una función `factorizations` que produce todas las _factorizaciones_ de un entero `n`, es decir, arrays de enteros cuyo producto es `n`. _Pista_: para un entero mayor que 1, parte el problema en dos subproblemas: encontrar el primer factor y encontrar los factores restantes.
 
 ## Pliegues (folds)
@@ -401,7 +401,7 @@ forall a b f. (Foldable f) => (b -> a -> b) -> b -> f a -> b
 forall a b f. (Foldable f) => (a -> b -> b) -> b -> f a -> b
 ```
 
-Estos tipos son más necesarios de lo que nos interesa por ahora. Para los propositos de este capítulo, podemos asumir que PSCi nos da la siguente respuesta (más específica):
+Estos tipos son más necesarios de lo que nos interesa por ahora. Para los propósitos de este capítulo, podemos asumir que PSCi nos da la siguiente respuesta (más específica):
 
 ```text
 > :type foldl
@@ -453,7 +453,7 @@ Mientras que el pliegue por la derecha es equivalente a esto:
 
 ## Recursividad final (tail recursion)
 
-La recursividad es una téctica potente para especificar algoritmos, pero tiene un problema: evaluar funciones recursivas en JavaScript puede llevar a errores de desbordamiento de pila si las entradas son demasiado grandes.
+La recursividad es una técnica potente para especificar algoritmos, pero tiene un problema: evaluar funciones recursivas en JavaScript puede llevar a errores de desbordamiento de pila si las entradas son demasiado grandes.
 
 Es fácil verificar el problema con el siguiente código en PSCi:
 
@@ -490,7 +490,7 @@ Date cuenta de que la llamada recursiva a `fact` es lo último que sucede en est
 
 ## Acumuladores (accumulators)
 
-Una forma común de convertir una función que no es recursiva final en una función recursiva final es usar un _parámetro acumulador_. Un parametro acumulador es un parametro adicional que se añade a una función para _acumular_ un valor de retorno, en contraposición a usar el valor de retorno para acumular el resultado.
+Una forma común de convertir una función que no es recursiva final en una función recursiva final es usar un _parámetro acumulador_. Un parámetro acumulador es un parámetro adicional que se añade a una función para _acumular_ un valor de retorno, en contraposición a usar el valor de retorno para acumular el resultado.
 
 Por ejemplo, considera esta recursividad de array que invierte el array de entrada añadiendo elementos de la cabeza del array de entrada al final del resultado:
 
@@ -520,7 +520,7 @@ Date cuenta también de que mientras que podemos considerar el acumulador como "
 
 ## Prefiere pliegues a recursividad explícita
 
-Si podemos escribir nuestras funciones recursivas usando recursividad final podemos beneficiarnos de las optimizaciones de recursividad final, de manera que parece tentador intentar escribir todas nuestras funciones de esta forma. Sin embargo, es fácil olvidar que muchas funciones se puedes escribir directamente como un pliegue sobre un array o una estructura de datos similar. Escribir algoritmos directamente en terminos de combinadores como `map` y `fold` tiene la ventaja de la simplicidad del código. Estos combinadores se comprenden bien y, de esta manera, comunican la _intención_ del algoritmo mucho mejor que la recursividad explícita.
+Si podemos escribir nuestras funciones recursivas usando recursividad final podemos beneficiarnos de las optimizaciones de recursividad final, de manera que parece tentador intentar escribir todas nuestras funciones de esta forma. Sin embargo, es fácil olvidar que muchas funciones se puedes escribir directamente como un pliegue sobre un array o una estructura de datos similar. Escribir algoritmos directamente en términos de combinadores como `map` y `fold` tiene la ventaja de la simplicidad del código. Estos combinadores se comprenden bien y, de esta manera, comunican la _intención_ del algoritmo mucho mejor que la recursividad explícita.
 
 Por ejemplo, el ejemplo `reverse` se puede escribir como un pliegue al menos de dos maneras. Aquí hay una versión que usa `foldr`:
 
@@ -540,7 +540,7 @@ X> ## Ejercicios
 X>
 X> 1. (Fácil) Usa `foldl` para comprobar si todos los elementos de un array de valores booleanos son true.
 X> 2. (Medio) Identifica los arrays `xs` para los que la función `foldl (==) false xs` devuelve true.
-X> 3. (Medio) Reescribe la siguiente función en forma recursiva final usando un parametro acumulador:
+X> 3. (Medio) Reescribe la siguiente función en forma recursiva final usando un parámetro acumulador:
 X>
 X>     ```haskell
 X>     import Prelude
@@ -632,7 +632,7 @@ Probemos esta función en PSCi:
 
 ¡Estupendo! Ahora veamos si podemos escribir esta función usando un array por comprensión usando notación do.
 
-Recuerda que una flecha hacia atrás corresponde a elegir un elemento de un array. El primer paso es elegir el elemento de los hijos inmediatos del argumento. A continuación, llamamos a la función recursivamente para ese fichero. Como estamos usando notación do, hay una llamada implicita a `concatMap` que concatena todos los resultados recursivos.
+Recuerda que una flecha hacia atrás corresponde a elegir un elemento de un array. El primer paso es elegir el elemento de los hijos inmediatos del argumento. A continuación, llamamos a la función recursivamente para ese fichero. Como estamos usando notación do, hay una llamada implícita a `concatMap` que concatena todos los resultados recursivos.
 
 Aquí está la nueva versión:
 
