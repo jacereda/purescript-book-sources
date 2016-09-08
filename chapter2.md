@@ -4,7 +4,7 @@
 
 En este capítulo, el objetivo será preparar un entorno de desarrollo para PureScript y escribir nuestro primer programa en PureScript.
 
-Nuestro primer proyecto será una biblioteca PureScript muy simple, que propocionará una única función para calcular la longitud de la diagonal de un triángulo rectángulo.
+Nuestro primer proyecto será una biblioteca PureScript muy simple, que proporcionará una única función para calcular la longitud de la diagonal de un triángulo rectángulo.
 
 ## Introducción
 
@@ -28,8 +28,8 @@ $ psc
 
 Otras opciones para instalar el compilador de PureScript:
 
-- Usar un gestor de paquetes popular, como NPM o Hombrew (en MacOS).
-- Construir el compilador desde los fuentes. Las instrucciones están disponibles en el sitio web de PureScript.
+- Usar un gestor de paquetes popular, como NPM o Homebrew (en MacOS).
+- Construir el compilador a partir del código fuente. Las instrucciones están disponibles en el sitio web de PureScript.
 
 ## Instalando las herramientas
 
@@ -104,7 +104,7 @@ $ pulp browserify
 * Browserifying...
 ```
 
-A continuación de esto, debes ver un monton de código JavaScript impreso en la consola. Esto es la salida de la herramienta [Browserify](http://browserify.org/) aplicada a una biblioteca estándar de PureScript llamada _Prelude_, así como el código del directorio `src`. Este código JavaScript puede redirigirse a un fichero e incluirse en un documento HTML. Si lo intentas, debes ver las palabras "Hello, World!" impresas en la consola de tu navegador.
+A continuación de esto, debes ver un montón de código JavaScript impreso en la consola. Esto es la salida de la herramienta [Browserify](http://browserify.org/) aplicada a una biblioteca estándar de PureScript llamada _Prelude_, así como el código del directorio `src`. Este código JavaScript puede redirigirse a un fichero e incluirse en un documento HTML. Si lo intentas, debes ver las palabras "Hello, World!" impresas en la consola de tu navegador.
 
 ## Quitando código no usado
 
@@ -159,7 +159,7 @@ Los módulos generados serán colocados en el directorio `output` por defecto. C
 
 ## Seguimiento de dependencias con Bower
 
-Para escribir la función `diagonal` (el objetivo de este capítulo), necesitaremos poder calcular raices cuadradas. El paquete `purescript-math` contiene definiciones de tipos para las funciones definidas en el objeto JavaScript `Math`, así que instalémoslo:
+Para escribir la función `diagonal` (el objetivo de este capítulo), necesitaremos poder calcular raíces cuadradas. El paquete `purescript-math` contiene definiciones de tipos para las funciones definidas en el objeto JavaScript `Math`, así que instalémoslo:
 
 ```text
 $ bower install purescript-math --save
@@ -263,7 +263,7 @@ Probemos ahora nuestra nueva función `diagonal` en PSCi:
 13.0
 ```
 
-Tambén puedes usar PSCi para definir funciones:
+También puedes usar PSCi para definir funciones:
 
 ```text
 > let double x = x * 2
