@@ -6,7 +6,7 @@ Este capítulo presentará dos nuevos conceptos: tipos de datos algebraicos (alg
 
 El ajuste de patrones es una técnica común en la programación funcional y permite al desarrollador escribir funciones compactas que expresan ideas potencialmente complejas partiendo su implementación en múltiples casos.
 
-Los tipos de datos algebraicos son una característica del sistema de tipos de PureScript que permiten un nivel similar de expresividad en el lengueje de los tipos; están estrechamente relacionados con el ajuste de patrones.
+Los tipos de datos algebraicos son una característica del sistema de tipos de PureScript que permiten un nivel similar de expresividad en el lenguaje de los tipos; están estrechamente relacionados con el ajuste de patrones.
 
 El objetivo del capítulo será escribir una biblioteca para describir y manipular gráficos vectoriales simples usando tipos de datos algebraicos y ajuste de patrones.
 
@@ -118,7 +118,7 @@ X> 1. (Medio) Busca la _Regla de Pascal_ para calcular coeficientes binomiales. 
 
 ## Patrones de array (Array Patterns)
 
-Los _patrones de array literales_ proporcionan una forma de ajustarse a arrays de una longitud fija. Por ejemplo, supongamos que queremos escribir una función `isEmpty` que identifica arrays vacios. Podríamos hacer esto usando un patrón de array vacío (`[]`) en la primera alternativa: 
+Los _patrones de array literales_ proporcionan una forma de ajustarse a arrays de una longitud fija. Por ejemplo, supongamos que queremos escribir una función `isEmpty` que identifica arrays vacíos. Podríamos hacer esto usando un patrón de array vacío (`[]`) en la primera alternativa: 
 
 ```haskell
 isEmpty :: forall a. Array a -> Boolean
@@ -150,7 +150,7 @@ El primer patrón sólo se ajusta a arrays de cinco elementos, cuyo primer y seg
 0
 ```
 
-Los patrones de array literales nos permiten ajustar arrays de una longitud fija, pero PureScript _no_ proporciona ningún medio para ajustar arrays de una longitud no especificada. En versiones más viejas del compilador, una característica llamada _patrones cons_ (cons patterns) porporcionaba una forma de descomponer arrays en su elemento de cabeza y su cola, pero debido al pobre rendimiento de los arrays inmutables en JavaScript, esta característica fue eliminada. Si necesitas una estructura de datos que soporte este tipo de ajuste, la manera recomendada es usar `Data.List`. Existen otras estructuras de datos que proporcionan para distintas operaciones rendimiento asintótico mejorado.
+Los patrones de array literales nos permiten ajustar arrays de una longitud fija, pero PureScript _no_ proporciona ningún medio para ajustar arrays de una longitud no especificada. En versiones más viejas del compilador, una característica llamada _patrones cons_ (cons patterns) proporcionaba una forma de descomponer arrays en su elemento de cabeza y su cola, pero debido al pobre rendimiento de los arrays inmutables en JavaScript, esta característica fue eliminada. Si necesitas una estructura de datos que soporte este tipo de ajuste, la manera recomendada es usar `Data.List`. Existen otras estructuras de datos que proporcionan para distintas operaciones rendimiento asintótico mejorado.
 
 ## Patrones de registro (record patterns) y polimorfismo de fila (row polymorphism)
 
@@ -377,7 +377,7 @@ data Point = Point
 
 El tipo de datos `Point` ilustra algunos puntos interesantes:
 
-- Los datos portados por un costructor de ADT no están restringidos a tipos primitivos: los constructores pueden incluir registros, arrays, o incluso otros ADTs.
+- Los datos portados por un constructor de ADT no están restringidos a tipos primitivos: los constructores pueden incluir registros, arrays, o incluso otros ADTs.
 - Aunque los ADTs son útiles para describir datos con múltiples constructores, también pueden ser útiles cuando hay un único constructor.
 - Los constructores de un tipo de datos algebraico pueden tener el mismo nombre que el propio ADT. Esto es bastante común y es importante no confundir el _constructor de tipo_ `Point` con el _constructor de datos_ `Point`; viven en espacios de nombres distintos.
 
@@ -399,7 +399,7 @@ Los constructores de datos se pueden usar también para definir estructuras de d
 data List a = Nil | Cons a (List a)
 ```
 
-Este ejemplo está sacado del paquete `purescript-lists`. Aquí, el constructor `Nil` representa una lista vacía, y `Cons` se usa para crear listas no vacías a partir de un elemente de cabeza y una cola. Date cuenta como la cola se define usando el tipo de datos `List a`, convirtiéndose en un tipo de datos recursivo.
+Este ejemplo está sacado del paquete `purescript-lists`. Aquí, el constructor `Nil` representa una lista vacía, y `Cons` se usa para crear listas no vacías a partir de un elemento de cabeza y una cola. Date cuenta como la cola se define usando el tipo de datos `List a`, convirtiéndose en un tipo de datos recursivo.
 
 ## Usando ADTs
 
