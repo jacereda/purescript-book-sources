@@ -1,8 +1,8 @@
-# Funciones y registros
+# Funciones y registros (records)
 
 ## Objetivos del capítulo
 
-Este capítulo presenta dos elementos esenciales de los programas PureScript: funciones y registros (records). Además veremos cómo estructurar programas PureScript y cómo usar los tipos como una ayuda en el desarrollo de programas.
+Este capítulo presenta dos elementos esenciales de los programas PureScript: funciones y registros. Además veremos cómo estructurar programas PureScript y cómo usar los tipos como una ayuda en el desarrollo de programas.
 
 Construiremos una aplicación de agenda simple para manejar una lista de contactos. Este código presentará algunas nuevas ideas de la sintaxis de PureScript.
 
@@ -109,7 +109,7 @@ Los campos de los registros se pueden acceder usando un punto, seguido por la et
 ["Functional Programming","JavaScript"]
 ```
 
-Las funciones de PureScript se corresponden con las funciones de JavaScript. Las bibliotecas estándar de PureScript proporcionan un monton de ejemplos de funciones, y veremos más en este capítulo:
+Las funciones de PureScript se corresponden con las funciones de JavaScript. Las bibliotecas estándar de PureScript proporcionan un montón de ejemplos de funciones, y veremos más en este capítulo:
 
 ```text
 > import Prelude
@@ -222,7 +222,7 @@ example x y z = foo + bar
 
 Date cuenta de que las declaraciones de `foo` y `bar` tienen mayor nivel de sangría que la declaración de `example`.
 
-La única excepción a esta regla es la palabre clave `where` en la declaración de `module` inicial al comienzo del fichero fuente.
+La única excepción a esta regla es la palabra clave `where` en la declaración de `module` inicial al comienzo del fichero fuente.
 
 ## Definiendo nuestros tipos
 
@@ -294,7 +294,7 @@ El _sistema de familias_ de PureScript soporta otras familias interesantes que v
 
 ## Mostrando entradas de la agenda
 
-Escribamos nuestra primera función, que representará una entrada de la agenda como una cadena. Empezamos dando a la función un tipo. Esto es opcional, pero es una buena práctica, ya que actua como una forma de documentación. De hecho, el compilador de PureScript emitirá un aviso si una declaración del nivel superior no contiene una anotación de tipo. Una declaración de tipo separa con el símbolo `::` el nombre de la función de su tipo:
+Escribamos nuestra primera función, que representará una entrada de la agenda como una cadena. Empezamos dando a la función un tipo. Esto es opcional, pero es una buena práctica, ya que actúa como una forma de documentación. De hecho, el compilador de PureScript emitirá un aviso si una declaración del nivel superior no contiene una anotación de tipo. Una declaración de tipo separa con el símbolo `::` el nombre de la función de su tipo:
 
 ```haskell
 showEntry :: Entry -> String
@@ -512,7 +512,7 @@ head :: AddressBook -> Maybe Entry
 
 Sabemos que necesitaremos pasar el nombre y apellidos que queremos buscar como argumentos a nuestra función.
 
-También sabemos que necesitaremos una función para pasar a `filter`. Llamemos a esta función `filterEntry`. `filterEntry` tendra tipo `Entry -> Boolean`. La aplicación `filter filterEntry` tendrá entonces tipo `AddressBook -> AddressBook`. Si pasamos el resultado de esta función a la función `head`, obtenemos nuestro resultado de tipo `Maybe Entry`.
+También sabemos que necesitaremos una función para pasar a `filter`. Llamemos a esta función `filterEntry`. `filterEntry` tendrá tipo `Entry -> Boolean`. La aplicación `filter filterEntry` tendrá entonces tipo `AddressBook -> AddressBook`. Si pasamos el resultado de esta función a la función `head`, obtenemos nuestro resultado de tipo `Maybe Entry`.
 
 Juntando esto, una firma de tipo razonable para nuestra función, que llamaremos `findEntry`, es:
 
@@ -556,7 +556,7 @@ Esto es equivalente a la aplicación usual `head (filter filterEntry book)`.
 
 Así, `($)` toma una función y un valor, y aplica la función al valor.
 
-Pero por qué podríamos querer usar `$` en lugar de aplicación de función normal? La razon es que `$` es un operador de baja precedencia asociativo por la derecha. Esto significa que `$` nos permite quitar pares de paréntesis para aplicaciones anidadas profundamente.
+Pero por qué podríamos querer usar `$` en lugar de aplicación de función normal? La razón es que `$` es un operador de baja precedencia asociativo por la derecha. Esto significa que `$` nos permite quitar pares de paréntesis para aplicaciones anidadas profundamente.
 
 Por ejemplo, la siguiente aplicación de función anidada que encuentra la calle en la dirección del jefe de un empleado:
 
@@ -643,7 +643,7 @@ Afortunadamente, el módulo Prelude proporciona una manera de hacer esto. El ope
 Nothing
 ```
 
-Eso está mejor. El valor de retorno `Nothing` indica que el valor de retorno opcional no contiene un valor, como esperabamos.
+Eso está mejor. El valor de retorno `Nothing` indica que el valor de retorno opcional no contiene un valor, como esperábamos.
 
 Para facilitar el uso, podemos crear una función que imprime `Entry` como una String, de manera que no tengamos que usar `showEntry` cada vez:
 
@@ -651,7 +651,7 @@ Para facilitar el uso, podemos crear una función que imprime `Entry` como una S
 > let printEntry firstName lastName book = map showEntry (findEntry firstName lastName book)
 ```
 
-Ahora creemos una agenda no vacía e intentemos de nuevo. Reusaremos nuestra entrada de ejemplo anterior:
+Ahora creemos una agenda no vacía e intentemos de nuevo. Reutilizaremos nuestra entrada de ejemplo anterior:
 
 ```text
 > let book1 = insertEntry entry emptyBook
@@ -666,7 +666,7 @@ Esta vez, el resultado contenía el valor correcto. Intenta definir una agenda `
 X> ## Ejercicios
 X>
 X> 1. (Fácil) Comprueba que entiendes la función `findEntry` escribiendo los tipos de cada una de sus expresiones principales. Por ejemplo, el tipo de la función `head` en este uso se especializa a `AddressBook -> Maybe Entry`.
-X> 1. (Medio) Escribe una función que busca una `Entry` dada una dirección reusando el código existente en `findEntry`. Prueba tu función en PSCi.
+X> 1. (Medio) Escribe una función que busca una `Entry` dada una dirección reutilizando el código existente en `findEntry`. Prueba tu función en PSCi.
 X> 1. (Medio) Escribe una función que comprueba si un nombre aparece en `AddressBook` devolviendo un valor Boolean. _Pista_: Usa PSCi para buscar el tipo de la función `Data.List.null` que comprueba si una lista está o no vacía.
 X> 1. (Difícil) Escribe una función `removeDuplicates` que elimina entradas duplicadas de la agenda con el mismo nombre y apellido. _Pista_: Usa PSCi para buscar el tipo de la función `Data.List.nubBy` que elimina elementos duplicados de una lista basándose en un predicado de igualdad.
 
