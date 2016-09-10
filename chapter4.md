@@ -14,7 +14,7 @@ El código fuente para este capítulo está contenido en los dos ficheros `src/D
 
 El módulo `Data.Path` contiene un modelo de un sistema de ficheros virtual. No necesitas modificar el contenido de este módulo.
 
-El módulo `FileOperations` contiene funciones que usan el API `Data.Path`. Las soluciones a los ejercicios se deben implementar en este fichero.
+El módulo `FileOperations` contiene funciones que usan la API `Data.Path`. Las soluciones a los ejercicios se deben implementar en este fichero.
 
 El proyecto tiene las siguientes dependencias de Bower:
 
@@ -582,7 +582,7 @@ size :: Path -> Maybe Number
 isDirectory :: Path -> Boolean
 ```
 
-Podemos probar el API en PSCi:
+Podemos probar la API en PSCi:
 
 ```text
 $ pulp psci
@@ -599,7 +599,7 @@ true
 [/bin/,/etc/,/home/]
 ```
 
-El módulo `FileOperations` define funciones que usan el API de `Data.Path`. No necesitas modificar el módulo `Data.Path` o entender su implementación. Trabajaremos en el módulo `FileOperations`.
+El módulo `FileOperations` define funciones que usan la API de `Data.Path`. No necesitas modificar el módulo `Data.Path` o entender su implementación. Trabajaremos en el módulo `FileOperations`.
 
 ## Listando todos los ficheros
 

@@ -2,13 +2,13 @@
 
 ## Objetivos del capítulo
 
-Este capítulo será un ejemplo extendido enfocado en el paquete `purescript-canvas`, que proporciona una forma de generar gráficos 2D desde Purescript usando el API Canvas de HTML5.
+Este capítulo será un ejemplo extendido enfocado en el paquete `purescript-canvas`, que proporciona una forma de generar gráficos 2D desde Purescript usando la API Canvas de HTML5.
 
 ## Preparación del proyecto
 
 El módulo de este proyecto introduce las siguientes dependencias de Bower nuevas:
 
-- `purescript-canvas`, que da tipos a los métodos del API Canvas de HTML5
+- `purescript-canvas`, que da tipos a los métodos de la API Canvas de HTML5
 - `purescript-refs`, que proporciona un efecto secundario para usar _referencias globales mutables_
 
 El código fuente para el capítulo está dividido en un conjunto de módulos, cada uno de los cuales define un método `main`. Las distintas secciones de este capítulo están implementadas en ficheros diferentes, y el módulo `Main` se puede cambiar modificando el comando de construcción de Pulp para ejecutar el método `main` del fichero adecuado en cada momento.
@@ -17,7 +17,7 @@ El fichero HTML `html/index.html` contiene un único elemento `canvas` que se us
 
 ## Formas simples
 
-El fichero `Example/Rectangle.purs` contiene un ejemplo introductorio simple que dibuja un único rectángulo azul en el centro del lienzo. El módulo importa `Control.Monad.Eff`, y también el módulo `Graphics.Canvas` que contiene acciones en la mónada `Eff` para trabajar con el API Canvas.
+El fichero `Example/Rectangle.purs` contiene un ejemplo introductorio simple que dibuja un único rectángulo azul en el centro del lienzo. El módulo importa `Control.Monad.Eff`, y también el módulo `Graphics.Canvas` que contiene acciones en la mónada `Eff` para trabajar con la API Canvas.
 
 La acción `main` comienza, como los otros módulos, usando la acción `getCanvasElementById` para obtener una referencia al objeto lienzo, y la acción `getContext2D` para acceder al contexto de representación 2D del canvas:
 
@@ -312,7 +312,7 @@ El efecto de esta secuencia de acciones es que la escena se rota, se escala, y f
 
 Un caso de uso común es representar un subconjunto de la escena usando una transformación y restablecer la transformación a continuación.
 
-El API de Canvas proporciona los métodos `save` y `restore` que manipulan una _pila_ de estados asociados con el lienzo. `purescript-canvas` envuelve esta funcionalidad en las siguientes funciones:
+La API de Canvas proporciona los métodos `save` y `restore` que manipulan una _pila_ de estados asociados con el lienzo. `purescript-canvas` envuelve esta funcionalidad en las siguientes funciones:
 
 ```haskell
 save
@@ -688,7 +688,7 @@ X> 1. (Difícil) Usa una mónada diferente `m` para la función de interpretaci�
 
 ## Conclusión
 
-En este capítulo hemos aprendido cómo usar el API Canvas de HTML5 desde PureScript usando la biblioteca `purescript-canvas`. Vimos también una demostración práctica de muchas de las técnicas que ya habíamos aprendido: asociaciones y pliegues, registros y polimorfismo de fila, y la mónada `Eff` para gestionar efectos secundarios.
+En este capítulo hemos aprendido cómo usar la API Canvas de HTML5 desde PureScript usando la biblioteca `purescript-canvas`. Vimos también una demostración práctica de muchas de las técnicas que ya habíamos aprendido: asociaciones y pliegues, registros y polimorfismo de fila, y la mónada `Eff` para gestionar efectos secundarios.
 
 Los ejemplos demuestran también la potencia de las funciones de orden mayor y la _separación de datos de la implementación_. Sería posible extender estas ideas para separar por completo la representación de una escena de su función de dibujado usando un tipo de datos algebraico, por ejemplo:
 

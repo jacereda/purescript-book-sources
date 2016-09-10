@@ -826,7 +826,7 @@ main = void do
   log "Rendering address book component"
 ```
 
-Después, `main` usa el API DOM para obtener una referencia (`doc`) al cuerpo del documento:
+Después, `main` usa la API DOM para obtener una referencia (`doc`) al cuerpo del documento:
 
 ```haskell
   doc <- window >>= document
