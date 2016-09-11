@@ -58,7 +58,7 @@ Podemos ver que esta función es correcta en PSCi:
 
 En el último capítulo, formamos una intuición para el funtor aplicativo `Maybe`; las funciones PureScript pueden empotrarse en un lenguaje de programación mayor que soporta _valores opcionales_. De la misma manera, podemos desarrollar la intuición para la _mónada array_; permite empotrar funciones PureScript en un lenguaje de programación mayor que soporta _elección no determinista_.
 
-En general, una _mónada_ para algún constructor de tipo `m` proporciona una manera de usar notación do con valores de tipo `m a`. Date cuenta de que en el array por comprensión anterior, cada línea contiene un cálculo de tipo `Array a` para algún tipo `a`. En general, cada linea de un bloque de notación do contendrá un cálculo de tipo `m a` para algún tipo `a` y nuestra mónada `m`. La mónada `m` debe ser la misma en cada línea (es decir, fijamos los efectos secundarios), pero los tipos `a` pueden ser diferentes (es decir, cálculos individuales pueden tener distintos tipos de resultado).
+En general, una _mónada_ para algún constructor de tipo `m` proporciona una manera de usar notación do con valores de tipo `m a`. Date cuenta de que en el array por comprensión anterior, cada línea contiene un cálculo de tipo `Array a` para algún tipo `a`. En general, cada línea de un bloque de notación do contendrá un cálculo de tipo `m a` para algún tipo `a` y nuestra mónada `m`. La mónada `m` debe ser la misma en cada línea (es decir, fijamos los efectos secundarios), pero los tipos `a` pueden ser diferentes (es decir, cálculos individuales pueden tener distintos tipos de resultado).
 
 Aquí hay otro ejemplo de notación do, esta vez aplicado al constructor de tipo `Maybe`. Supongamos que tenemos un tipo `XML` que representa nodos XML y una función
 
@@ -81,7 +81,7 @@ userCity root = do
 
 La función `userCity` busca un elemento hijo `profile`, un elemento `address` dentro del elemento `profile`, y finalmente un elemento `city` dentro del elemento `address`. Si cualquiera de estos elementos no existe, el valor de retorno será `Nothing`. En caso contrario, el valor de retorno se construye usando `Just` con el nodo `city`.
 
-Recuerda, la función `pure` de la última linea está definida para todo funtor `Applicative`. Como `pure` está definido como `Just` para el funtor aplicativo `Maybe`, sería igualmente válido cambiar la última línea por `Just city`.
+Recuerda, la función `pure` de la última línea está definida para todo funtor `Applicative`. Como `pure` está definido como `Just` para el funtor aplicativo `Maybe`, sería igualmente válido cambiar la última línea por `Just city`.
 
 ## La clase de tipos mónada
 
@@ -1064,4 +1064,4 @@ Este capítulo ha cubierto un montón de ideas sobre gestión de efectos secunda
 - Hemos visto como los efectos y los registros se gestionan en el sistema de familias, y la conexión entre registros extensibles y efectos extensibles.
 - Hemos usado la mónada `Eff` para gestionar una variedad de efectos: generación de números aleatorios, excepciones, entrada/salida por consola, estado mutable, y manipulación del DOM usando React.
 
-La mónada `Eff` es una herramienta fundamental el el código PureScript del mundo real. Se usará en el resto del libro para gestionar efectos secundarios y en otros casos de uso.
+La mónada `Eff` es una herramienta fundamental en el código PureScript del mundo real. Se usará en el resto del libro para gestionar efectos secundarios y en otros casos de uso.

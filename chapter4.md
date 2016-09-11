@@ -308,12 +308,12 @@ factors n = filter (\xs -> product xs == n) $ do
 La palabra clave `do` comienza un bloque de código que usa notación do. El bloque consiste de expresiones de estos tipos:
 
 - Expresiones que ligan elementos de un array a un nombre. Estas se indican con la flecha apuntando hacia atrás `<-`, con un nombre a la izquierda y una expresión a la derecha de tipo array.
-- Expresiones que no ligan elementos del array a nombres. La última linea `pure [i, j]` es un ejemplo de este tipo de expresión.
+- Expresiones que no ligan elementos del array a nombres. La última línea `pure [i, j]` es un ejemplo de este tipo de expresión.
 - Expresiones que dan nombre a expresiones, usando la palabra clave `let`.
 
 Con suerte, esta nueva notación hará la estructura del algoritmo más clara. Si reemplazas mentalmente la flecha `<-` con la palabra "elige", puedes leerlo como sigue: "elige un elemento `i` entre 1 y `n`, luego elige un elemento `j` entre `i` y `n`, y finalmente devuelve `[i, j]`".
 
-En la última linea usamos la función `pure`. Esta función puede ser evaluada en PSCi, pero tenemos que proporcionar un tipo:
+En la última línea usamos la función `pure`. Esta función puede ser evaluada en PSCi, pero tenemos que proporcionar un tipo:
 
 ```text
 > pure [1, 2] :: Array (Array Int)

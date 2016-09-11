@@ -107,7 +107,7 @@ import Control.Monad.Eff.Console (log)
 main = log "Hello, World!"
 ```
 
-Los comandos que deben escribirse en la linea de comandos estarán precedidos por un símbolo de dólar:
+Los comandos que deben escribirse en la línea de comandos estarán precedidos por un símbolo de dólar:
 
 ```text
 $ pulp build
