@@ -556,7 +556,7 @@ Esto es equivalente a la aplicación usual `head (filter filterEntry book)`.
 
 Así, `($)` toma una función y un valor, y aplica la función al valor.
 
-Pero por qué podríamos querer usar `$` en lugar de aplicación de función normal? La razón es que `$` es un operador de baja precedencia asociativo por la derecha. Esto significa que `$` nos permite quitar pares de paréntesis para aplicaciones anidadas profundamente.
+Pero ¿por qué podríamos querer usar `$` en lugar de aplicación de función normal? La razón es que `$` es un operador de baja precedencia asociativo por la derecha. Esto significa que `$` nos permite quitar pares de paréntesis para aplicaciones anidadas profundamente.
 
 Por ejemplo, la siguiente aplicación de función anidada que encuentra la calle en la dirección del jefe de un empleado:
 

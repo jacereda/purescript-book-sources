@@ -602,10 +602,10 @@ X>     ```haskell
 X>     data Tree a = Leaf | Branch (Tree a) a (Tree a)
 X>     ```
 X>
-X>     Esto corresponde a un recorrido in-orden. Y para un recorrido pre-orden? Y para uno post-orden?
+X>     Esto corresponde a un recorrido in-orden. ¿Y para un recorrido pre-orden? ¿Y para uno post-orden?
 X>
 X> 1. (Medio) Modifica el código para hacer que el campo `address` del tipo `Person` sea opcional usando `Data.Maybe`. _Pista_: Usa `traverse` para validar un campo de tipo `Maybe a`.
-X> 1. (Difícil) Intenta escribir `sequence` en términos de `traverse`. Puedes escribir `traverse` en términos de `sequence`?
+X> 1. (Difícil) Intenta escribir `sequence` en términos de `traverse`. ¿Puedes escribir `traverse` en términos de `sequence`?
 
 ## Funtores aplicativos para paralelismo
 
