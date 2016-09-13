@@ -168,7 +168,7 @@ Podemos usar este operador como sigue:
 ["1","2","3","4","5"]
 ```
 
-_Nota_: Los operadores infijos pueden ser una gran herramienta para definir lenguajes específicos de dominio con una sintaxis natural. Sin embargo, si se usan sin cuidado, pueden volver el código ilegible para principiantes, de manera que es una buena cosa tener precaución al definir cualquier operador nuevo.
+_Nota_: Los operadores infijos pueden ser una gran herramienta para definir lenguajes específicos del dominio con una sintaxis natural. Sin embargo, si se usan sin cuidado, pueden volver el código ilegible para principiantes, de manera que es una buena cosa tener precaución al definir cualquier operador nuevo.
 
 En el ejemplo anterior, hemos puesto la expresión `1 .. 5` entre paréntesis, pero de hecho no era necesario, porque el módulo `Data.Array` asigna un nivel de precedencia mayor al operador `..` que el asignado al operador `<$>`. En el ejemplo anterior, la precedencia del operador `..` se definía como `8`, el número tras la palabra clave `infix`. Este valor es más alto que el nivel de precedencia de `<$>`, lo que significa que no necesitamos añadir paréntesis:
 
