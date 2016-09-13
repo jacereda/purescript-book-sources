@@ -402,7 +402,7 @@ Pero `List Entry` es lo mismo que `AddressBook`, de manera que esto es equivalen
 Entry -> AddressBook -> AddressBook
 ```
 
-En nuestro caso, ya tenemos las entradas apropiadas: un `Entry` y un `AddressBook`, de manera que podemos aplicar `Cons` y obtener un nuevo `AddressBook`, que es exactamente lo que queremos!
+En nuestro caso, ya tenemos las entradas apropiadas: un `Entry` y un `AddressBook`, de manera que podemos aplicar `Cons` y obtener un nuevo `AddressBook`, ¡que es exactamente lo que queremos!
 
 Aquí está nuestra implementación de `insertEntry`:
 
