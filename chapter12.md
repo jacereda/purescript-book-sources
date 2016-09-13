@@ -1,8 +1,8 @@
-# El infierno de las llamadas de retorno (callback hell)
+# El infierno de retrollamadas (callback hell)
 
 ## Objetivos del capítulo
 
-En este capítulo veremos cómo las herramientas que hemos visto hasta ahora (a saber, transformadores de mónada y funtores aplicativos) se pueden usar para resolver algunos problemas del mundo real. En particular, veremos cómo podemos resolver el problema del infierno de las llamadas de retorno.
+En este capítulo veremos cómo las herramientas que hemos visto hasta ahora (a saber, transformadores de mónada y funtores aplicativos) se pueden usar para resolver algunos problemas del mundo real. En particular, veremos cómo podemos resolver el problema del infierno de retrollamadas.
 
 ## Preparación del proyecto
 
@@ -14,7 +14,7 @@ npm install
 
 ## El problema
 
-El código asíncrono en JavaScript usa normalmente _llamadas de retorno_ (callbacks) para estructurar el flujo del programa. Por ejemplo, para leer texto de un fichero, el método preferido es usar la función `readFile` y pasar una llamada de retorno (una función que se llamará cuando el texto esté disponible):
+El código asíncrono en JavaScript usa normalmente _retrollamadas_ (callbacks) para estructurar el flujo del programa. Por ejemplo, para leer texto de un fichero, el método preferido es usar la función `readFile` y pasar una retrollamada (una función que se llamará cuando el texto esté disponible):
 
 ```javascript
 function readText(onSuccess, onFailure) {
@@ -29,7 +29,7 @@ function readText(onSuccess, onFailure) {
 }
 ```
 
-Sin embargo, si hay involucradas múltiples operaciones, esto puede llevar rápidamente a llamadas de retorno anidadas, lo que puede acabar en código difícil de leer:
+Sin embargo, si hay involucradas múltiples operaciones, esto puede llevar rápidamente a retrollamadas anidadas, lo que puede acabar en código difícil de leer:
 
 ```javascript
 function copyFile(onSuccess, onFailure) {
@@ -78,8 +78,8 @@ function copyFile(onSuccess, onFailure) {
 
 Esta solución funciona, pero tiene algunos problemas:
 
-- Es necesario pasar resultados intermedios a funciones asíncronas como argumentos de función, de la misma manera que hemos pasado `data` a `writeCopy` arriba. Esto está bien para funciones pequeñas, pero si hay muchas llamadas de retorno involucradas, las dependencias de datos pueden volverse complejas, resultando en muchos argumentos de función adicionales.
-- Hay un patrón común. Las llamadas de retorno `onSuccess` y `onFailure` se especifican normalmente como argumentos a cada función asíncrona. Pero este patrón se tiene que documentar en la documentación del módulo que acompaña el código fuente. Es mejor capturar este patrón en el sistema de tipos y usarlo para forzar su uso.
+- Es necesario pasar resultados intermedios a funciones asíncronas como argumentos de función, de la misma manera que hemos pasado `data` a `writeCopy` arriba. Esto está bien para funciones pequeñas, pero si hay muchas retrollamadas involucradas, las dependencias de datos pueden volverse complejas, resultando en muchos argumentos de función adicionales.
+- Hay un patrón común. Las retrollamadas `onSuccess` y `onFailure` se especifican normalmente como argumentos a cada función asíncrona. Pero este patrón se tiene que documentar en la documentación del módulo que acompaña el código fuente. Es mejor capturar este patrón en el sistema de tipos y usarlo para forzar su uso.
 
 A continuación veremos cómo usar las técnicas que hemos aprendido hasta ahora para resolver estos problemas.
 
@@ -98,9 +98,9 @@ type ErrorCode = String
 type FilePath = String
 ```
 
-`readFile` toma un nombre de fichero y una llamada de retorno que toma dos argumentos. Si el fichero ha sido leído con éxito, el segundo argumento tendrá el contenido del fichero, y si no, el primer argumento se usará para indicar el error.
+`readFile` toma un nombre de fichero y una retrollamada que toma dos argumentos. Si el fichero ha sido leído con éxito, el segundo argumento tendrá el contenido del fichero, y si no, el primer argumento se usará para indicar el error.
 
-En nuestro caso, envolveremos `readFile` con una función que toma dos llamadas de retorno: una llamada de retorno de error (`onFailure`) y una llamada de retorno de resultado (`onSuccess`), igual que hicimos con `copyFile` y `writeCopy` arriba. Usando el soporte de funciones de múltiples argumentos de `Data.Function` por simplicidad, nuestra función envuelta `readFileImpl` puede tener esta pinta:
+En nuestro caso, envolveremos `readFile` con una función que toma dos retrollamadas: una retrollamada de error (`onFailure`) y una retrollamada de resultado (`onSuccess`), igual que hicimos con `copyFile` y `writeCopy` arriba. Usando el soporte de funciones de múltiples argumentos de `Data.Function` por simplicidad, nuestra función envuelta `readFileImpl` puede tener esta pinta:
 
 ```haskell
 foreign import readFileImpl
@@ -129,11 +129,11 @@ exports.readFileImpl = function(path, onSuccess, onFailure) {
 };
 ```
 
-Esta firma de tipo indica que `readFileImpl` toma tres argumentos: una ruta de fichero, una llamada de retorno de éxito y una llamada de retorno de error, y devuelve un cálculo con efectos secundarios que devuelve un resultado vacío (`Unit`). Fíjate en que a las llamades de retorno les damos tipos que usan la mónada `Eff` para registrar sus efectos.
+Esta firma de tipo indica que `readFileImpl` toma tres argumentos: una ruta de fichero, una retrollamada de éxito y una retrollamada de error, y devuelve un cálculo con efectos secundarios que devuelve un resultado vacío (`Unit`). Fíjate en que a las retrollamadas les damos tipos que usan la mónada `Eff` para registrar sus efectos.
 
 Debes intentar entender por qué esta implementación tiene la representación correcta en tiempo de ejecución para su tipo.
 
-`writeFileImpl` es muy similar; difiere únicamente en que el contenido del fichero se pasa a la función, no a la llamada de retorno. Su implementación tiene esta pinta:
+`writeFileImpl` es muy similar; difiere únicamente en que el contenido del fichero se pasa a la función, no a la retrollamada. Su implementación tiene esta pinta:
 
 ```haskell
 foreign import writeFileImpl
@@ -163,7 +163,7 @@ exports.writeFileImpl = function(path, data, onSuccess, onFailure) {
 
 Dadas estas declaraciones FFI, podemos escribir las implementaciones de `readFile` y `writeFile`. Estas usarán el módulo `Data.Function.Uncurried` para convertir las ligaduras FFI de múltiples argumentos en funciones currificadas normales de PureScript, y que por lo tanto tienen tipos algo más legibles.
 
-Además, en lugar de requerir dos llamadas de retorno, una para éxitos y otra para fallos, podemos requerir una única llamada de retorno que responde a ambas cosas. Esto es, la nueva llamada de retorno toma un valor en la mónada `Either ErrorCode` como argumento:
+Además, en lugar de requerir dos retrollamadas, una para éxitos y otra para fallos, podemos requerir una única retrollamada que responde a ambas cosas. Esto es, la nueva retrollamda toma un valor en la mónada `Either ErrorCode` como argumento:
 
 ```haskell
 readFile
@@ -191,7 +191,7 @@ writeFile path text k =
          (k <<< Left)
 ```
 
-Ahora podemos identificar un patrón importante. Cada una de estas funciones toma una llamada de retorno que devuelve un valor en alguna mónada (en este caso, `Eff (fs :: FS | eff)`) y devuelve un valor en _la misma mónada_. Esto significa que cuando la primera llamada de retorno devuelve un resultado, esa mónada se puede usar para ligar el resultado a la entrada de la siguiente función asíncrona. De hecho, eso es exactamente lo que hicimos a mano en el ejemplo `copyFile`.
+Ahora podemos identificar un patrón importante. Cada una de estas funciones toma una retrollamada que devuelve un valor en alguna mónada (en este caso, `Eff (fs :: FS | eff)`) y devuelve un valor en _la misma mónada_. Esto significa que cuando la primera retrollamada devuelve un resultado, esa mónada se puede usar para ligar el resultado a la entrada de la siguiente función asíncrona. De hecho, eso es exactamente lo que hicimos a mano en el ejemplo `copyFile`.
 
 Esto es la base del _transformador de mónada de continuación_, que está definido en el módulo `Control.Monad.Cont.Trans` de `purescript-transformers`.
 
@@ -201,7 +201,7 @@ Esto es la base del _transformador de mónada de continuación_, que está defin
 newtype ContT r m a = ContT ((a -> m r) -> m r)
 ```
 
-Una _continuación_ es simplemente otro nombre para una llamada de retorno. Una continuación captura el _resto_ de un cálculo; en nuestro caso, qué sucede después de que el resultado sea proporcionado tras una llamada asíncrona.
+Una _continuación_ es simplemente otro nombre para una retrollamada. Una continuación captura el _resto_ de un cálculo; en nuestro caso, qué sucede después de que el resultado sea proporcionado tras una llamada asíncrona.
 
 El argumento al constructor de datos `ContT` se parece notablemente a los tipos de `readFile` y `writeFile`. De hecho, si hacemos que el tipo `a` sea el tipo `Either ErrorCode String`, `r` sea `Unit` y `m` la mónada `Eff (fs :: FS | eff)`, podemos recuperar la parte derecha del tipo de `readFile`.
 
@@ -328,7 +328,7 @@ X> 1. (Medio) Escribe una función `concatenateMany` para concatenar múltiples 
 
 Como otro ejemplo de uso de `ContT` para gestionar funciones asíncronas, vamos a ver el módulo `Network.HTTP.Client` del código fuente de este capítulo. Este módulo usa la mónada `Async` para soportar peticiones HTTP asíncronas usando el módulo `request`, disponible via NPM.
 
-El módulo `request` suministra una función que toma un URL y una llamada de retorno, hace una petición HTTP(S) e invoca la llamada de retorno cuando la respuesta está disponible, o cuando ocurre un error. Aquí tenemos un ejemplo de petición:
+El módulo `request` suministra una función que toma un URL y una retrollamada, hace una petición HTTP(S) e invoca la retrollamada cuando la respuesta está disponible, o cuando ocurre un error. Aquí tenemos un ejemplo de petición:
 
 ```javascript
 require('request')('http://purescript.org'), function(err, _, body) {
@@ -371,7 +371,7 @@ exports.getImpl = function(uri, done, fail) {
 };
 ```
 
-De nuevo, podemos usar el módulo `Data.Function.Uncurried` para convertir esto en una función currificada PureScript normal. Como antes, combinamos las dos llamadas de retorno en una, esta vez aceptando un valor de tipo `Either String String`, y aplicamos el constructor `ContT` para construir una acción en nuestra mónada `Async`:
+De nuevo, podemos usar el módulo `Data.Function.Uncurried` para convertir esto en una función currificada PureScript normal. Como antes, combinamos las dos retrollamadas en una, esta vez aceptando un valor de tipo `Either String String`, y aplicamos el constructor `ContT` para construir una acción en nuestra mónada `Async`:
 
 ```haskell
 get :: forall eff.
@@ -532,6 +532,6 @@ X>     Tu utilidad debe usar la biblioteca `purescript-foreign` para analizar lo
 
 En este capítulo, hemos visto una demostración práctica de los transformadores de mónada:
 
-- Vimos cómo el idioma común en JavaScript de pasar llamadas de retorno se puede capturar con el transformador de mónada `ContT`.
-- Vimos cómo el problema del infierno de las llamadas de retorno se puede resolver usando notación do para expresar cálculos asíncronos secuenciales, y un funtor aplicativo para expresar paralelismo.
+- Vimos cómo el idioma común en JavaScript de pasar retrollamadas se puede capturar con el transformador de mónada `ContT`.
+- Vimos cómo el problema del infierno de las retrollamadas se puede resolver usando notación do para expresar cálculos asíncronos secuenciales, y un funtor aplicativo para expresar paralelismo.
 - Hemos usado `ExceptT` pare expresar _errores asíncronos_.

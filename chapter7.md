@@ -624,7 +624,7 @@ f <$> parallel computation1
 
 Este cálculo comenzaría a calcular valores de manera asíncrona usando `computation 1` y `computation 2`. Cuando ambos resultados hayan sido calculados, serán combinados en un resultado único usando la función `f`.
 
-Veremos esta idea en más detalle cuando apliquemos los funtores aplicativos al problema del _infierno de llamadas de retorno_ (callback hell) más adelante.
+Veremos esta idea en más detalle cuando apliquemos los funtores aplicativos al problema del _infierno de retrollamadas_ (callback hell) más adelante.
 
 Los funtores aplicativos son una manera natural de capturar efectos secundarios en paralelo que pueden ser combinados.
 

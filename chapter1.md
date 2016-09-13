@@ -16,7 +16,7 @@ Hace ya algún tiempo que han empezado a aparecer las técnicas de programación
          .value();
     ```
 
-- La programación asíncrona en NodeJS se apoya firmemente en las funciones como valores de primera clase para definir devoluciones de llamada (callbacks). 
+- La programación asíncrona en NodeJS se apoya firmemente en las funciones como valores de primera clase para definir retrollamadas (callbacks). 
 
     ```javascript
     require('fs').readFile(sourceFile, function (error, data) {

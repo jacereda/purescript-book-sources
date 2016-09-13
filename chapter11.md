@@ -1040,4 +1040,4 @@ Hemos visto cómo los transformadores de mónadas nos permiten escribir código 
 
 Los transformadores de mónadas son una demostración excelente de la clase de código expresivo que se puede escribir basándose en capacidades avanzadas del sistema de tipos como polimorfismo de orden mayor y clases de tipos multiparamétricas.
 
-En el siguiente capítulo veremos como los transformadores de mónadas se pueden usar para dar una solución a una queja común cuando se trabaja con código JavaScript asíncrono; el problema del _infierno de llamadas de retorno_.
+En el siguiente capítulo veremos como los transformadores de mónadas se pueden usar para dar una solución a una queja común cuando se trabaja con código JavaScript asíncrono; el problema del _infierno de retrollamadas_.
